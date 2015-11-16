@@ -18,6 +18,17 @@ class FakeAddress
 		return ucfirst($cities[array_rand($cities)]);
 	}
 
+	public static function indicatif()
+	{
+		return Probability::multiple([
+			'0-79'   => 'fr',
+			'80-89'  => 'en',
+			'90-93'  => 'it',
+			'94-96'  => 'es',
+			'97-100' => 'de'
+		]);
+	}
+
 	public static function getAddress($secondary = false)
 	{
 		$noms = [
