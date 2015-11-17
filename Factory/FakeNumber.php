@@ -12,6 +12,11 @@ namespace Rudak\Bundle\FakeDataGenerator\Factory;
 class FakeNumber
 {
 
+	public static function number($size = 5, $max = 999999)
+	{
+		return str_pad((int) rand(0, $max), $size, '0', STR_PAD_LEFT);
+	}
+
 	public static function phone()
 	{
 		return sprintf('%02d', rand(1, 5)) . self::formated() . self::formated() . self::formated() . self::formated();
