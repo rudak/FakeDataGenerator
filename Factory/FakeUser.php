@@ -24,6 +24,19 @@ class FakeUser
 		return $uppercase ? ucfirst($name) : $name;
 	}
 
+
+	public static function getPseudo($nb = 3, $uppercase = true)
+	{
+		$list   = self::getSyllabes();
+		$pseudo = '';
+		for ($i = 0; $i < $nb; $i++) {
+			$pseudo .= $list[array_rand($list)];
+		}
+		$pseudo .= Probability::success(20) ? rand(10, 99) : null;
+		return $uppercase ? ucfirst($pseudo) : $pseudo;
+	}
+
+
 	private static function getLastNamesList()
 	{
 		return [
@@ -50,5 +63,21 @@ class FakeUser
 			'jean', 'frederic', 'remi', 'bruce', 'romain', 'ludovic', 'nathanael', 'benjamin', 'lucas', 'maxime', 'maxence',
 			'olivier', 'arthur', 'benoit', 'paul', 'etienne', 'tony'
 		];
+	}
+
+
+	private static function getSyllabes()
+	{
+		return [
+			'la', 'le', 'les', 'li', 'lo', 'lu', 'lou', 'lan', 'lin', 'len',
+			'ca', 'cau', 'ce', 'ci', 'co', 'cu', 'cui', 'cou', 'ceu', 'cor',
+			'ba', 'bu', 'bi', 'bo', 'bou', 'ban', 'beu', 'bic',
+			'sta', 'sto', 'stu', 'ste', 'sti', 'stou',
+			'ma', 'me', 'mi', 'mo', 'mu', 'mou', 'man', 'men', 'min', 'mar',
+			'fa', 'fe', 'fi', 'fo', 'fu', 'fou', 'fan', 'fin', 'far',
+			'ga', 'ge', 'gue', 'gi', 'gui', 'gu', 'gus', 'gur',
+			'ra', 're', 'ri', 'ro', 'ru', 'rou', 'ran', 'ras', 'rus', 'ris', 'ruk'
+		];
+
 	}
 }

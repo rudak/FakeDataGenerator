@@ -34,11 +34,18 @@ class FakeWeb
 
 	private static function getExtList()
 	{
-		return ['fr', 'org', 'com', 'en', 'biz', 'io', 'net'];
+		return [
+			'fr', 'org', 'com', 'en', 'biz', 'io', 'net', 'cat', 'bzh',
+			'edu', 'gov', 'mil', 'dk', 'en', 'es', 'nl', 'de'
+		];
 	}
 
 	private static function getNddList()
 	{
-		return ['free', 'orange', 'zuttel', 'inerbase', 'tellec', 'wanadoo', 'getzen', 'roadimpact', 'dimland'];
+		return [
+			'free', 'orange', 'zuttel', 'inerbase', 'tellec', 'wanadoo', 'getzen', 'roadimpact', 'dimland',
+			'guitar', 'death-metal', 'webfanzine', 'fanclub', 'riverside', 'doomsday', 'social-club',
+			'asia', 'africa', 'europa', 'antartica', 'seasick', 'mondial', 'fc-johnson', 'santa-maria', 'camping'
+		];
 	}
 }
