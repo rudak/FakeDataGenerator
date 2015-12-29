@@ -32,7 +32,7 @@ class FakeUser
 		for ($i = 0; $i < $nb; $i++) {
 			$pseudo .= $list[array_rand($list)];
 		}
-		$pseudo .= Probability::success(20) ? rand(10, 99) : null;
+		$pseudo .= Probability::success(40) ? rand(10, 99) : null;
 		return $uppercase ? ucfirst($pseudo) : $pseudo;
 	}
 
@@ -76,7 +76,9 @@ class FakeUser
 			'ma', 'me', 'mi', 'mo', 'mu', 'mou', 'man', 'men', 'min', 'mar',
 			'fa', 'fe', 'fi', 'fo', 'fu', 'fou', 'fan', 'fin', 'far',
 			'ga', 'ge', 'gue', 'gi', 'gui', 'gu', 'gus', 'gur',
-			'ra', 're', 'ri', 'ro', 'ru', 'rou', 'ran', 'ras', 'rus', 'ris', 'ruk'
+			'ra', 're', 'ri', 'ro', 'ru', 'rou', 'ran', 'ras', 'rus', 'ris', 'ruk',
+			'kail', 'tub', 'zic', 'zag', 'zin', 'zan', 'zou', 'usr', 'bin', 'var',
+			'666', '123', 'mouch', 'zob', 'boom', 'bang'
 		];
 
 	}
