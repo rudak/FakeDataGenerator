@@ -1,5 +1,5 @@
 <?php
-namespace Rudak\FakeDataGenerator;
+namespace Rudak\FDG;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
