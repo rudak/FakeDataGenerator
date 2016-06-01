@@ -1,5 +1,5 @@
 <?php
-namespace Rudak\FakeDataGenerator\Factory;
+namespace Rudak\FDG\Factory;
 
 class FakeBank
 {
