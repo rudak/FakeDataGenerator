@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rudak
- * Date: 17/11/2015
- * Time: 19:08
- */
-
 namespace Rudak\Bundle\FakeDataGenerator\Factory;
-
 
 class FakeText
 {
