@@ -1,7 +1,7 @@
 <?php
 namespace Rudak\Bundle\FakeDataGenerator\Factory;
 
-class FakeSentenceGenerator
+class FakeSentence
 {
     private static $wordlist;
 
