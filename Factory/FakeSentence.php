@@ -1,11 +1,16 @@
 <?php
-namespace Rudak\Bundle\FakeDataGenerator\Factory;
+namespace Rudak\FakeDataGenerator\Factory;
 
 class FakeSentence
 {
     private static $wordlist;
 
     private static $previous;
+
+    public static function getUltraSmallTitle()
+    {
+        return self::doTheJob('twoWords');
+    }
 
     private static function doTheJob($type)
     {
@@ -80,11 +85,6 @@ class FakeSentence
     private static function setPrevious($word)
     {
         self::$previous = $word;
-    }
-
-    public static function getUltraSmallTitle()
-    {
-        return self::doTheJob('twoWords');
     }
 
     public static function getSmallTitle()

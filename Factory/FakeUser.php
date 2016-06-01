@@ -1,64 +1,14 @@
 <?php
-namespace Rudak\Bundle\FakeDataGenerator\Factory;
-
-/**
- * Created by PhpStorm.
- * User: rudak
- * Date: 15/11/2015
- * Time: 23:37
- */
+namespace Rudak\FakeDataGenerator\Factory;
 class FakeUser
 {
-
-    public static function make_seed()
-    {
-        list($usec, $sec) = explode(' ', microtime());
-        return (float)$sec + ((float)$usec * 100000);
-    }
-
 
     public static function getFirstName($uppercase = true)
     {
         $list = self::getFirstNamesList();
         $name = $list[array_rand($list)];
+
         return $uppercase ? ucfirst($name) : $name;
-    }
-
-    public static function getLastName($uppercase = true)
-    {
-        $list = self::getLastNamesList();
-        shuffle($list);
-        $name = $list[array_rand($list)];
-        return $uppercase ? ucfirst($name) : $name;
-    }
-
-
-    public static function getPseudo($nb = 3, $uppercase = true)
-    {
-        mt_srand(self::make_seed());
-        $list = self::getSyllabes();
-        $pseudo = '';
-        for ($i = 0; $i < $nb; $i++) {
-            shuffle($list);
-            $pseudo .= $list[array_rand($list)];
-        }
-        $pseudo .= Probability::success(80) ? mt_rand(10, 99) : null;
-        return $uppercase ? ucfirst($pseudo) : $pseudo;
-
-    }
-
-
-    private static function getLastNamesList()
-    {
-        return [
-            'malandin', 'crocq', 'boutinon', 'giraud', 'vinet', 'taillecourt', 'chagnas', 'moreau', 'flaubert',
-            'dupuis', 'raynaud', 'meriac', 'vimpere', 'viroulaud', 'vulfin', 'jounaud', 'gounard', 'lacour', 'chazaud',
-            'tardieux', 'vergnaud', 'tabaries', 'soulat', 'sureau', 'souric', 'texier', 'tison', 'chabernaud', 'martin',
-            'champion', 'clenet', 'cobb', 'deret', 'deschamps', 'touplin', 'peloquin', 'dufour', 'davis', 'melet',
-            'gamaury', 'pousseau', 'fonseca', 'arrivet', 'laurent', 'mousnier', 'certin', 'renaud', 'barbet', 'leroy',
-            'lamaison', 'coissard', 'croisin', 'vasseron', 'brousse', 'delage', 'brisard', 'lenormand',
-            'lagarde', 'coulon', 'dadet', 'bonnet'
-        ];
     }
 
     private static function getFirstNamesList()
@@ -72,10 +22,53 @@ class FakeUser
             'gael', 'antony', 'corentin', 'seb', 'julien', 'adrian', 'adrien', 'kevin', 'louis', 'valentin', 'pierreyves',
             'arnaud', 'quentin', 'lucas', 'gabriel', 'tiphaine', 'baptiste', 'charly', 'danny', 'alexandre', 'ulrich', 'florian',
             'jean', 'frederic', 'remi', 'bruce', 'romain', 'ludovic', 'nathanael', 'benjamin', 'lucas', 'maxime', 'maxence',
-            'olivier', 'arthur', 'benoit', 'paul', 'etienne', 'tony'
+            'olivier', 'arthur', 'benoit', 'paul', 'etienne', 'tony',
         ];
     }
 
+    public static function getLastName($uppercase = true)
+    {
+        $list = self::getLastNamesList();
+        shuffle($list);
+        $name = $list[array_rand($list)];
+
+        return $uppercase ? ucfirst($name) : $name;
+    }
+
+    private static function getLastNamesList()
+    {
+        return [
+            'malandin', 'crocq', 'boutinon', 'giraud', 'vinet', 'taillecourt', 'chagnas', 'moreau', 'flaubert',
+            'dupuis', 'raynaud', 'meriac', 'vimpere', 'viroulaud', 'vulfin', 'jounaud', 'gounard', 'lacour', 'chazaud',
+            'tardieux', 'vergnaud', 'tabaries', 'soulat', 'sureau', 'souric', 'texier', 'tison', 'chabernaud', 'martin',
+            'champion', 'clenet', 'cobb', 'deret', 'deschamps', 'touplin', 'peloquin', 'dufour', 'davis', 'melet',
+            'gamaury', 'pousseau', 'fonseca', 'arrivet', 'laurent', 'mousnier', 'certin', 'renaud', 'barbet', 'leroy',
+            'lamaison', 'coissard', 'croisin', 'vasseron', 'brousse', 'delage', 'brisard', 'lenormand',
+            'lagarde', 'coulon', 'dadet', 'bonnet',
+        ];
+    }
+
+    public static function getPseudo($nb = 3, $uppercase = true)
+    {
+        mt_srand(self::make_seed());
+        $list   = self::getSyllabes();
+        $pseudo = '';
+        for ($i = 0; $i < $nb; $i++) {
+            shuffle($list);
+            $pseudo .= $list[array_rand($list)];
+        }
+        $pseudo .= Probability::success(80) ? mt_rand(10, 99) : null;
+
+        return $uppercase ? ucfirst($pseudo) : $pseudo;
+
+    }
+
+    public static function make_seed()
+    {
+        list($usec, $sec) = explode(' ', microtime());
+
+        return (float)$sec + ((float)$usec * 100000);
+    }
 
     private static function getSyllabes()
     {
@@ -89,7 +82,7 @@ class FakeUser
             'ga', 'ge', 'gue', 'gi', 'gui', 'gu', 'gus', 'gur',
             'ra', 're', 'ri', 'ro', 'ru', 'rou', 'ran', 'ras', 'rus', 'ris', 'ruk',
             'kail', 'tub', 'zic', 'zag', 'zin', 'zan', 'zou', 'usr', 'bin', 'var',
-            '666', '123', 'mouch', 'zob', 'boom', 'bang'
+            '666', '123', 'mouch', 'zob', 'boom', 'bang',
         ];
 
     }

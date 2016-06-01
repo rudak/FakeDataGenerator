@@ -1,10 +1,8 @@
 <?php
+namespace Rudak\FakeDataGenerator;
 
-namespace Rudak\Bundle\FakeDataGenerator;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle as BaseBundle;
-
-class FakeDataGeneratorBundle extends BaseBundle
+class FakeDataGeneratorBundle extends Bundle
 {
-
 }
