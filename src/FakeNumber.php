@@ -1,5 +1,5 @@
 <?php
-namespace Rudak\FDG\Factory;
+namespace Rudak\FDG;
 
 
 class FakeNumber

@@ -1,7 +1,7 @@
 <?php
 namespace Rudak\FDG\Factory;
 
-use Rudak\FDG\Factory\Probability;
+use Rudak\FDG\Probability;
 
 class FakeAddress
 {
