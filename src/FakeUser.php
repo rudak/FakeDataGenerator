@@ -30,7 +30,6 @@ class FakeUser
     public static function getLastName($uppercase = true)
     {
         $list = self::getLastNamesList();
-        shuffle($list);
         $name = $list[array_rand($list)];
 
         return $uppercase ? ucfirst($name) : $name;
@@ -51,40 +50,32 @@ class FakeUser
 
     public static function getPseudo($nb = 3, $uppercase = true)
     {
-        mt_srand(self::make_seed());
         $list   = self::getSyllabes();
         $pseudo = '';
         for ($i = 0; $i < $nb; $i++) {
-            shuffle($list);
+            $pseudo .= Probability::success(5) ? mt_rand(10, 99) : null;
             $pseudo .= $list[array_rand($list)];
+            $pseudo .= Probability::success(10) ? mt_rand(10, 99) : null;
         }
-        $pseudo .= Probability::success(80) ? mt_rand(10, 99) : null;
+        $pseudo .= Probability::success(70) ? mt_rand(10, 99) : null;
 
         return $uppercase ? ucfirst($pseudo) : $pseudo;
 
     }
 
-    public static function make_seed()
-    {
-        list($usec, $sec) = explode(' ', microtime());
-
-        return (float)$sec + ((float)$usec * 100000);
-    }
-
     private static function getSyllabes()
     {
         return [
-            'la', 'le', 'les', 'li', 'lo', 'lu', 'lou', 'lan', 'lin', 'len',
-            'ca', 'cau', 'ce', 'ci', 'co', 'cu', 'cui', 'cou', 'ceu', 'cor',
+            '666', '123', 'mouch', 'zob', 'boom', 'bang',
             'ba', 'bu', 'bi', 'bo', 'bou', 'ban', 'beu', 'bic',
-            'sta', 'sto', 'stu', 'ste', 'sti', 'stou',
-            'ma', 'me', 'mi', 'mo', 'mu', 'mou', 'man', 'men', 'min', 'mar',
+            'ca', 'cau', 'ce', 'ci', 'co', 'cu', 'cui', 'cou', 'ceu', 'cor',
             'fa', 'fe', 'fi', 'fo', 'fu', 'fou', 'fan', 'fin', 'far',
             'ga', 'ge', 'gue', 'gi', 'gui', 'gu', 'gus', 'gur',
-            'ra', 're', 'ri', 'ro', 'ru', 'rou', 'ran', 'ras', 'rus', 'ris', 'ruk',
             'kail', 'tub', 'zic', 'zag', 'zin', 'zan', 'zou', 'usr', 'bin', 'var',
-            '666', '123', 'mouch', 'zob', 'boom', 'bang',
+            'la', 'le', 'les', 'li', 'lo', 'lu', 'lou', 'lan', 'lin', 'len',
+            'ma', 'me', 'mi', 'mo', 'mu', 'mou', 'man', 'men', 'min', 'mar',
+            'ra', 're', 'ri', 'ro', 'ru', 'rou', 'ran', 'ras', 'rus', 'ris', 'ruk',
+            'sta', 'sto', 'stu', 'ste', 'sti', 'stou',
         ];
-
     }
 }
