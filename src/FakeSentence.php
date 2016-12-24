@@ -3,33 +3,98 @@ namespace Rudak\FDG;
 
 class FakeSentence
 {
+    const TWO_WORDS      = 'twoWords';
+    const SMALL_TITLE    = 'smallTitle';
+    const TITLE          = 'title';
+    const SMALL_SENTENCE = 'smallSentence';
+    const SENTENCE       = 'sentence';
+    const BIG_SENTENCE   = 'bigSentence';
+
     private static $wordlist;
 
-    private static $previous;
 
+    /**
+     * Renvoie juste un petit titre de deux mots.
+     * @return mixed
+     */
     public static function getUltraSmallTitle()
     {
-        return self::doTheJob('twoWords');
+        return self::doTheJob(self::TWO_WORDS);
     }
 
-    private static function doTheJob($type)
+
+    /**
+     * Renvoie un petit titre
+     * @return mixed
+     */
+    public static function getSmallTitle()
+    {
+        return self::doTheJob(self::SMALL_TITLE);
+    }
+
+    /**
+     * Renvoie un titre de longueur standard
+     * @return mixed
+     */
+    public static function getTitle()
+    {
+        return self::doTheJob(self::TITLE);
+    }
+
+    /**
+     * Renvoie une petite phrase
+     * @return mixed
+     */
+    public static function getSmallSentence()
+    {
+        return self::doTheJob(self::SMALL_SENTENCE);
+    }
+
+    /**
+     * Renvoie une phrase
+     * @return mixed
+     */
+    public static function getSentence()
+    {
+        return self::doTheJob(self::SENTENCE);
+    }
+
+    /**
+     * Renvoie une grosse phrase
+     * @return mixed
+     */
+    public static function getBigSentence()
+    {
+        return self::doTheJob(self::BIG_SENTENCE);
+    }
+
+    /**
+     * Renvoie un paragraphe par defaut
+     * @param int $nb le nombre de paragraphes attendus
+     * @return string
+     */
+    public static function getParagraph($nb = 1)
     {
         $out = '';
-        self::getWordlist();
-
-        for ($i = 0; $i < self::getLength($type); $i++) {
-            $word = self::$wordlist[$i];
-            while ($word == self::$previous) {
-                shuffle(self::$wordlist);
-                $word = self::$wordlist[$i];
-            }
-            self::setPrevious($word);
-            $out .= $word . ' ';
+        for ($i = 0; $i < $nb; $i++) {
+            $out .= sprintf(self::getParagraphPattern(), self::doTheJob(self::BIG_SENTENCE));
         }
 
-        return trim($out);
+        return $out;
     }
 
+    /**
+     * Renvoie les balises HTML correspondant au paragraphe.
+     * @return string
+     */
+    private static function getParagraphPattern()
+    {
+        return "<p>%s.</p>\n";
+    }
+
+    /**
+     * Crée une liste de mot à partir de la chaine renvoyée par getBaseSentence()
+     */
     private static function getWordlist()
     {
         if (!is_array(self::$wordlist)) {
@@ -39,6 +104,10 @@ class FakeSentence
         shuffle(self::$wordlist);
     }
 
+    /**
+     * Renvoie la phrase de base qui servira a découper les mots
+     * @return string
+     */
     private static function getBaseSentence()
     {
         return 'Ut sibi fuerat socius sagittis. Ego intervenerit. Vere quia a te nuper iratus occidit illos undecim
@@ -58,72 +127,51 @@ class FakeSentence
          shoulder. Ground round hamburger flank prosciutto shank brisket drumstick';
     }
 
+    /**
+     * Renvoie une valeur en fonction du type de chaine choisie.
+     * @param $type
+     * @return int
+     */
     private static function getLength($type)
     {
         switch ($type) {
-            case 'twoWords':
+            case self::TWO_WORDS:
                 return 2;
                 break;
-            case 'smallTitle':
+            case self::SMALL_TITLE:
                 return rand(3, 4);
                 break;
-            case 'title':
+            case self::TITLE:
                 return rand(5, 10);
                 break;
-            case 'smallSentence':
+            case self::SMALL_SENTENCE:
                 return rand(15, 25);
                 break;
-            case 'sentence':
+            case self::SENTENCE:
                 return rand(30, 45);
                 break;
-            case 'bigSentence':
+            case self::BIG_SENTENCE:
                 return rand(55, 100);
                 break;
         }
     }
 
-    private static function setPrevious($word)
-    {
-        self::$previous = $word;
-    }
-
-    public static function getSmallTitle()
-    {
-        return self::doTheJob('smallTitle');
-    }
-
-    public static function getTitle()
-    {
-        return self::doTheJob('title');
-    }
-
-    public static function getSmallSentence()
-    {
-        return self::doTheJob('smallSentence');
-    }
-
-    public static function getSentence()
-    {
-        return self::doTheJob('sentence');
-    }
-
-    public static function getBigSentence()
-    {
-        return self::doTheJob('bigSentence');
-    }
-
-    public static function getParagraph($nb = 1)
+    /**
+     * Va chercher la liste de mots
+     * boucle dessus en fonction de la taille choisie pour former une chaine.
+     * @param $type
+     * @return mixed
+     */
+    private static function doTheJob($type)
     {
         $out = '';
-        for ($i = 0; $i < $nb; $i++) {
-            $out .= sprintf(self::getParagraphPattern(), self::doTheJob('bigSentence'));
+        self::getWordlist();
+
+        for ($i = 0; $i < self::getLength($type); $i++) {
+            $word = array_shift(self::$wordlist);
+            $out .= $word . ' ';
         }
 
-        return $out;
-    }
-
-    private static function getParagraphPattern()
-    {
-        return "<p>%s.</p>\n";
+        return trim($out);
     }
 }

@@ -6,11 +6,19 @@ use Rudak\FDG\Probability;
 class FakeAddress
 {
 
+    /**
+     * Renvoie un code postal
+     * @return mixed
+     */
     public static function getPostCode()
     {
         return rand(1000, 9585) * 10;
     }
 
+    /**
+     * Renvoie un nom de ville
+     * @return mixed
+     */
     public static function getCity()
     {
         $cities = self::getCityList();
@@ -30,17 +38,26 @@ class FakeAddress
         ];
     }
 
+    /**
+     * Renvoie un indicatif de pays
+     * @return null
+     */
     public static function indicatif()
     {
         return Probability::multiple([
-                                         '0-79'   => 'fr',
-                                         '80-89'  => 'en',
-                                         '90-93'  => 'it',
-                                         '94-96'  => 'es',
-                                         '97-100' => 'de',
-                                     ]);
+            '0-79'   => 'fr',
+            '80-89'  => 'en',
+            '90-93'  => 'it',
+            '94-96'  => 'es',
+            '97-100' => 'de',
+        ]);
     }
 
+    /**
+     * Renvoie une adresse au hasard
+     * @param bool $secondary Complement d'adresse
+     * @return string
+     */
     public static function getAddress($secondary = false)
     {
         $noms = [
@@ -51,17 +68,11 @@ class FakeAddress
             'Gustave Flaurin', 'Raymond Pasteur', 'Louise Joussieux', 'Cécile Fluton', 'Nicolas Simon', 'Bryan Colson',
         ];
         if (false == $secondary) {
-            $numero = '';
             $types  = ['chemin', 'rue', 'allée', 'avenue', 'route', 'impasse'];
-            if (rand(0, 100) < 30) {
-                $numero = rand(1, 580) . ' ';
-            }
-
+            $numero = Probability::success(30) ? rand(1, 580) . ' ' : null;
             return $numero . ucfirst($types[array_rand($types)]) . ' ' . $noms[array_rand($noms)];
-        }
-        else {
+        } else {
             $types = ['Batiment', 'Place', 'Résidence'];
-
             return $types[array_rand($types)] . ' ' . $noms[array_rand($noms)];
         }
     }
